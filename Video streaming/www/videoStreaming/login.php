@@ -1,6 +1,5 @@
 <?php
     require_once("./../../seguridad/videoStreaming/login-s.php");
-    
     require_once("./src/Pantalla.class.php");
     
     $mensaje = "";

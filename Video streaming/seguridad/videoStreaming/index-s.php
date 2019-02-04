@@ -1,9 +1,10 @@
 <?php
-    require_once("./../../seguridad/videoStreaming/funcionesSesiones.php");
+    require_once("./../../seguridad/videoStreaming/FuncionesSesiones.class.php");
     
+    $funcionesSesiones = new FuncionesSesiones();
+    $funcionesSesiones -> iniciarSesion();
     $usuario = "";
-    iniciarSesion();  
-    if (!validarSesion($usuario)) {
+    if (!$funcionesSesiones -> validarSesion($usuario)) {
         header("Location: ./login.php");
         exit;
     }

@@ -7,6 +7,7 @@
     <link rel="icon" href="./img/iconos/favicon.png" />
     <link rel="stylesheet" type="text/css" href="./css/login.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" />
+    <script src="./js/utilidades.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
@@ -18,9 +19,8 @@
     </header>
     <section>
         <h3>Iniciar sesión</h3>
-        <p id="mensaje"><?=$mensaje?></p>
         <form method="post" action="./src/validarSesiones.php" autocomplete="off">
-            <input type="text" placeholder="Usuario" name="usuario" maxlength="20" size="20" required="required" />
+            <input type="text" placeholder="DNI" name="dni" maxlength="20" size="20" required="required" />
             <input type="password" placeholder="Contraseña" name="clave" maxlength="20" size="20" required="required" />
             <button type="submit">Iniciar sesión</button>
         </form>

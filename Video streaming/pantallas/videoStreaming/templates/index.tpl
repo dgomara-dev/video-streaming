@@ -7,7 +7,7 @@
     <link rel="icon" href="./img/iconos/favicon.png" />
     <link rel="stylesheet" type="text/css" href="./css/index.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" />
-    <script src="./js/index.js"></script>
+    <script src="./js/utilidades.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
@@ -17,7 +17,11 @@
         <a href="./index.php"><img src="./img/logo.png" alt="Nitflex" /></a>
     </header>
     <aside>
-        asdasdasdasdasda sdasdasda sdasdasdasdasdasda
+        
+        
+        
+        
+        
     </aside>
     <section>
         <article>
