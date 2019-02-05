@@ -29,16 +29,54 @@ header img {
     margin-left: 25px;
 }
 
-header a:hover {
+header button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: #3BA7FF;
+    font-size: 14px;
+    font-weight: bold;
+    position: fixed;
+    top: 20px;
+    left: 89%;
+}
+
+header a:hover, button:hover {
     opacity: 0.5;
 }
 
 aside {
     background-color: #1C1C1C;
     position: absolute;
-    width: 180px;
+    width: 280px;
     height: 100%;
-    padding: 20px 30px;
+}
+
+aside ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333333;
+}
+
+aside li {
+    display: inline-block;
+    text-decoration: none;
+    color: #FFFFFF;
+    padding: 15px 30px;
+    padding-right: 0;
+    width: 89%;
+}
+
+aside li img{
+    vertical-align: top;
+    padding-right: 20px;
+}
+
+aside li:hover {
+    background-color: #333333;
 }
 
 section {
@@ -46,4 +84,9 @@ section {
     padding-top: 60px;
     padding-left: 380px;
     padding-right: 160px;
+}
+
+.active {
+    background-color: #333333;
+    font-weight: bold;
 }

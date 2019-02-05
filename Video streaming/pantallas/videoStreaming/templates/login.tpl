@@ -19,7 +19,7 @@
     </header>
     <section>
         <h3>Iniciar sesión</h3>
-        <form method="post" action="./src/validarSesiones.php" autocomplete="off">
+        <form method="post" action="./src/sesionValidar.php" autocomplete="off">
             <input type="text" placeholder="DNI" name="dni" maxlength="20" size="20" required="required" />
             <input type="password" placeholder="Contraseña" name="clave" maxlength="20" size="20" required="required" />
             <button type="submit">Iniciar sesión</button>
