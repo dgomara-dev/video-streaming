@@ -1,20 +1,20 @@
 <?php
-    require_once("./../../seguridad/videoStreaming/index-s.php");
-    require_once("./../../seguridad/videoStreaming/FuncionesPerfiles.class.php");
-    require_once("./src/Pantalla.class.php");
+    require("./../../seguridad/videoStreaming/VideosBD.class.php");
+    require("./../../seguridad/videoStreaming/Funciones.class.php");
+    require("./src/Pantalla.class.php");
     
-    $mensaje = "";
-    if (isset($_GET["mensaje"])) {
-        $mensaje = trim(strip_tags($_GET["mensaje"]));
+    $funciones = new Funciones();
+    $funciones -> iniciarSesion();
+    $usuario = "";
+    if (!$funciones -> validarSesion($usuario)) {
+        header("Location: ./login.php");
+        exit;
     }
+
+    $nombre = $funciones -> getNombre();   
+    $perfiles = $funciones -> getPerfiles();
     
-    $funcionesPerfiles = new FuncionesPerfiles();
-    $perfiles = $funcionesPerfiles -> getPerfiles();
-    $linea = "";
-    for ($i=0; $i<count($perfiles); $i++) {
-        $linea = $linea."<li onclick='cambiarClaseActiva()'><img src='./img/iconos/perfil.png' alt='Perfil' height='18' />".$perfiles[$i]."</li>";
-    }
-    $parametros = array("mensaje" => $mensaje, "perfiles" => $linea);
+    $parametros = array("nombre" => $nombre, "perfiles" => $perfiles);
     $pantalla = new Pantalla("./../../pantallas/videoStreaming");
     $pantalla -> mostrarPantalla("index.tpl", $parametros);
 ?>

@@ -5,7 +5,7 @@
         const CLAVE = "videos";
         const BD = "videos";
         
-        public function crearCanal() {
+        function crearCanal() {
             $canal = new mysqli(VideosBD::IP, VideosBD::USUARIO, VideosBD::CLAVE, VideosBD::BD);
             if ($canal -> connect_errno) {
                 die("ERROR: No se ha podido establecer conexión con la base de datos.");

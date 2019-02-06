@@ -1,11 +1,12 @@
 <?php
-    require_once("./../../../seguridad/videoStreaming/VideosBD.class.php");
-    require_once("./../../../seguridad/videoStreaming/FuncionesSesiones.class.php");
+    require("./../../../seguridad/videoStreaming/VideosBD.class.php");
+    require("./../../../seguridad/videoStreaming/Funciones.class.php");
 
-    $funcionesSesiones = new FuncionesSesiones();
-    $funcionesSesiones -> iniciarSesion();
+    $funciones = new Funciones();
+    $funciones -> iniciarSesion();
+
     $usuario = "";
-    if ($funcionesSesiones -> validarSesion($usuario)) {
+    if ($funciones -> validarSesion($usuario)) {
         header("Location: ./index.php");
         exit;
     }
@@ -44,4 +45,7 @@
 
     $_SESSION["validado"] = true;
     $_SESSION["dni"] = $dni;
+
+    $perfiles = $funciones -> getPerfiles();
+    $_SESSION["perfil"] = $perfiles[0];
 ?>

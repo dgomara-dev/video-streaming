@@ -30,6 +30,8 @@ header img {
 }
 
 header button {
+    display: inline;
+    float: right;
     background: none;
     border: none;
     cursor: pointer;
@@ -37,13 +39,21 @@ header button {
     color: #3BA7FF;
     font-size: 14px;
     font-weight: bold;
-    position: fixed;
-    top: 20px;
-    left: 89%;
+    margin-top: 5px;
 }
 
-header a:hover, button:hover {
+header a:hover,
+button:hover {
     opacity: 0.5;
+}
+
+header span {
+    float: left;
+    display: inline;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 5px 38px;
+    border-right: 1px solid gray;
 }
 
 aside {
@@ -57,26 +67,29 @@ aside ul {
     list-style: none;
     padding: 0;
     width: 100%;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
     border-bottom: 1px solid #333333;
 }
 
-aside li {
-    display: inline-block;
-    text-decoration: none;
+aside button {
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    text-align: left;
+    background-color: transparent;
+    border: none;
     color: #FFFFFF;
+    width: 100%;
     padding: 15px 30px;
-    padding-right: 0;
-    width: 89%;
 }
 
-aside li img{
+aside button img {
     vertical-align: top;
     padding-right: 20px;
 }
 
-aside li:hover {
+aside button:hover {
     background-color: #333333;
+    cursor: pointer;
 }
 
 section {
@@ -86,7 +99,9 @@ section {
     padding-right: 160px;
 }
 
-.active {
-    background-color: #333333;
-    font-weight: bold;
+#sesion {
+    position: absolute;
+    top: 15px;
+    left: 68%;
+    width: 420px;
 }

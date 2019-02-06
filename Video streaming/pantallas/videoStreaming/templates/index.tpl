@@ -2,26 +2,35 @@
 <html lang="es">
 
 <head>
-    <title>Index - Nitflex</title>
+    <title>Inicio - Nitflex</title>
     <meta charset="UTF-8" />
     <link rel="icon" href="./img/iconos/favicon.png" />
     <link rel="stylesheet" type="text/css" href="./css/index.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-     <script src="./js/index.js"></script>
+    <script src="./js/utilidades.js"></script>
 </head>
 
-<body onload="mostrarMensaje('{$mensaje}');">
+<body>
     <header>
         <input type="image" src="./img/iconos/menu.png" onclick="toggleAside()" class="slide-toggle" />
         <a href="./index.php"><img src="./img/logo.png" alt="Nitflex" /></a>
-        <form action="./src/sesionCerrar.php">
-            <button type="submit">CERRAR SESIÓN</button>
-        </form>
+        <div id="sesion">
+            <span>{$nombre}</span>
+            <form action="./src/sesionCerrar.php">
+                <button type="submit">CERRAR SESIÓN</button>
+            </form>
+        </div>
     </header>
     <aside>
         <ul>
-            {$perfiles}
+            {foreach from=$perfiles item=perfil}
+            <li>
+                <form action="cambiarPerfil()">
+                    <button type="submit"><img src='./img/iconos/perfil.png' alt='Perfil' height='18' />{$perfil}</button>
+                </form>
+            </li>
+            {/foreach}
         </ul>
     </aside>
     <section>
