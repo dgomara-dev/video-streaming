@@ -15,7 +15,13 @@
         }
         
         
-        function getNombre() {
+        function cambiarPerfil($perfil) {
+            //TODO
+        }
+        
+        
+        // Devuelve el nombre el usuario activo (ej. Andrés Izquierdo García)
+        function getNombreUsuario() {
             if (!isset($_SESSION["dni"])) {
                 die("ERROR DE SERVIDOR: No se ha podido recibir el dni de usuario.");
             }
@@ -32,7 +38,8 @@
         }
         
         
-        function getPerfiles() {
+        // Devuelve un ARRAY con TODOS los codigo_perfil del usuario activo
+        function getCodigosPerfil() {
             if (!isset($_SESSION["dni"])) {
                 die("ERROR DE SERVIDOR: No se ha podido recibir el dni de usuario.");
             }
@@ -46,18 +53,40 @@
             $codigos = array();
             while ($consulta -> fetch()) {    
                 array_push($codigos, $codigo);
-            }       
-            $consulta = $canal -> prepare("SELECT descripcion FROM perfil WHERE codigo = ?");
-            $perfiles = array();
-            for ($i=0; $i<count($codigos); $i++) {
-                $consulta -> bind_param("s", $codigos[$i]);
-                $consulta -> execute();
-                $consulta -> bind_result($descripcion);
-                $consulta -> fetch();
-                array_push($perfiles, $descripcion);
             }
             $canal -> close();        
-            return $perfiles;
-        }   
+            return $codigos;          
+        }        
+        
+        
+        // Devuelve un STRING con la descripción de UN codigo_perfil
+        function getDescripcion($codigo_perfil) {
+            $videosBD = new VideosBD();
+            $canal = $videosBD -> crearCanal();
+            $consulta = $canal -> prepare("SELECT descripcion FROM perfil WHERE codigo = ?");
+            $consulta -> bind_param("s", $codigo_perfil);
+            $consulta -> execute();
+            $consulta -> bind_result($descripcion);
+            $consulta -> fetch();
+            $canal -> close();
+            return $descripcion;
+        }
+        
+        
+        // Devuelve un ARRAY con los carteles de UN codigo_perfil
+        function getCarteles($codigo_perfil) {
+            $videosBD = new VideosBD();
+            $canal = $videosBD -> crearCanal();
+            $consulta = $canal -> prepare("SELECT cartel FROM videos WHERE codigo_perfil = ?");
+            $consulta -> bind_param("s", $codigo_perfil);
+            $consulta -> execute();
+            $consulta -> bind_result($cartel);
+            $carteles = array();
+            while ($consulta -> fetch()) {    
+                array_push($carteles, $cartel);
+            }
+            $canal -> close();        
+            return $carteles;            
+        }
     }
 ?>

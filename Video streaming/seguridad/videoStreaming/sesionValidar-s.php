@@ -45,7 +45,5 @@
 
     $_SESSION["validado"] = true;
     $_SESSION["dni"] = $dni;
-
-    $perfiles = $funciones -> getPerfiles();
-    $_SESSION["perfil"] = $perfiles[0];
+    $_SESSION["perfil"] = "todos";
 ?>
