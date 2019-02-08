@@ -11,3 +11,7 @@ function toggleAside() {
         $("aside").slideToggle();
     });
 }
+
+function proximamente() {
+    alert("Función no disponible.");
+}

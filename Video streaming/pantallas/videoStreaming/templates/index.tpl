@@ -25,33 +25,35 @@
     <aside>
         <ul>
             <li>
-                <form action="cambiarPerfil()">
+                <form action="#" onclick="proximamente()">
                     <button type="submit"><img src="./img/iconos/todos.png" height="18" />Todos los perfiles</button>
                 </form>
             </li>
             {foreach from=$descripcionesPerfil item=descripcion}
             <li>
-                <form action="cambiarPerfil()">
+                <form action="#" onclick="proximamente()">
                     <button type="submit"><img src="./img/iconos/perfil.png" height="18" />{$descripcion}</button>
                 </form>
             </li>
             {/foreach}
         </ul>
         <ul>
-            <form action="ordenarPorTema()">
+            <form action="#" onclick="proximamente()">
                 <button type="submit"><img src="./img/iconos/ordenar.png" height="18" />Por temática</button>
             </form>
-            <form action="ordenarAlfabet()">
+            <form action="#" onclick="proximamente()">
                 <button type="submit"><img src="./img/iconos/ordenar.png" height="18" />Por orden alfabético</button>
             </form>
         </ul>
     </aside>
     <section>
-        {foreach from=$rutasCarteles item=ruta}
+        {foreach from=$titulosPeliculas item=titulo}
+        {foreach from=$cartelesPeliculas item=cartel}
         <a href="#">
             <img src={$ruta} alt="Cartel" height="300" />
-            <p>Titulo</p>
+            <p>{$titulo}</p>
         </a>
+        {/foreach}
         {/foreach}
     </section>
 </body>
