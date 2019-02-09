@@ -2,14 +2,14 @@
     require("./../../../seguridad/videoStreaming/VideosBD.class.php");
     require("./../../../seguridad/videoStreaming/Funciones.class.php");
     require("./../../../seguridad/videoStreaming/Usuario.class.php");
+    require("./../../../seguridad/videoStreaming/Video.class.php");
 
 
-    // Llamada a iniciarSesion()
+
+    /*
+     *  Comprobar que no haya una sesión ya activa, en tal caso nos echa del script
+     */
     $funciones = new Funciones();
-    $funciones -> iniciarSesion();
-
-
-    // Comprobar que no haya una sesión ya activa, en tal caso nos echa del script
     $usuario = "";
     if ($funciones -> validarSesion($usuario)) {
         header("Location: ./index.php");
@@ -17,8 +17,9 @@
     }
 
 
+
     /*
-     * Comprobar que las credenciales del formulario son correctas
+     *  Comprobar que las credenciales del formulario son correctas
      */
     $dni = "";
     if (!isset($_POST["dni"])) {
@@ -53,8 +54,9 @@
     }
 
     
+
     /*
-     * Crear el objeto Usuario y guardar variables de sesión
+     *  Crear el usuario
      */
     $consulta = $canal -> prepare("SELECT nombre FROM usuarios WHERE dni = ?");
     $consulta -> bind_param("s", $dni);
@@ -73,9 +75,45 @@
     }
     $consulta -> close();
 
-    $canal -> close();
+    $usuario = new Usuario($dni, $nombre, $codigosPerfil);
+
+
+
+    /*
+     *  Crear los vídeos
+     */
+    $consulta1 = $canal -> prepare("SELECT codigo, titulo, cartel, descargable, sinopsis, video FROM videos WHERE codigo_perfil = ?");
+    $consulta2 = $canal -> prepare("SELECT codigo_tematica FROM asociado WHERE codigo_video = ?");
+    $videos = array();
+    foreach($codigosPerfil as $codigo) {
+        $consulta1 -> bind_param("s", $codigo);
+        $consulta1 -> execute();
+        $consulta1 -> bind_result($codigo, $titulo, $cartel, $descargable, $sinopsis, $video);    
+        while ($consulta1 -> fetch()) {
+            $consulta2 -> bind_param("s", $codigo);
+            $consulta2 -> execute();
+            $consulta2 -> bind_result($codigo_tematica);
+            $tematicas = array();
+            while ($consulta2 -> fetch()) {
+                array_push($tematicas, $codigo_tematica);
+            }
+            $ruta = "./img/carteles/".$cartel;
+            array_push($videos, new Video($codigo, $titulo, $cartel, $descargable, $sinopsis, $video, $tematicas, $ruta));
+        }
+    }
     
-    $_SESSION["usuario"] = new Usuario($dni, $nombre, $codigosPerfil);
+    $consulta1 -> close();  
+    $canal -> close();
+
+
+
+    /*
+     *  Guardamos los datos como variables de sesión
+     */
+    $funciones -> iniciarSesion();
+
+    $_SESSION["usuario"] = $usuario;
+    $_SESSION["videos"] = $videos;
     $_SESSION["perfilActivo"] = "TODOS";
     $_SESSION["orden"] = "ABC";
 ?>

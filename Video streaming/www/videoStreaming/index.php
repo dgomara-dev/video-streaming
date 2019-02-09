@@ -2,6 +2,7 @@
     require("./../../seguridad/videoStreaming/VideosBD.class.php");
     require("./../../seguridad/videoStreaming/Funciones.class.php");
     require("./../../seguridad/videoStreaming/Usuario.class.php");
+    require("./../../seguridad/videoStreaming/Video.class.php");
     require("./src/Pantalla.class.php");
     
 
@@ -42,46 +43,41 @@
         $consulta -> fetch();
         array_push($descripcionesPerfil, $descripcion);
     }
+    $consulta -> close();
 
     
 
     /*
-     *  Obtener los títulos y las rutas de los carteles, según el orden y el perfil
+     *  Ordenar los vídeos
      */
+    $videos = $_SESSION["videos"];
     if ($_SESSION["orden"] == "ABC") {
-        $consulta1 = $canal -> prepare("SELECT titulo FROM videos WHERE codigo_perfil = ? ORDER BY titulo");
-        $consulta2 = $canal -> prepare("SELECT cartel FROM videos WHERE codigo_perfil = ? ORDER BY titulo");
+        usort($videos, function($v1, $v2) {
+            return strcmp($v1 -> titulo, $v2 -> titulo);  
+        });
     }
-    else if ($_SESSION["orden"] == "TEMA") {
-        //todo
+    else {
+        // TODO -> De momento ordenar según la primera temática, arreglar si da tiempo
+        usort($videos, function($v1, $v2) {
+            return strcmp($v1 -> tematicas[0], $v2 -> tematicas[0]);  
+        }); 
     }
     
-    $titulosPeliculas = array();
-    $cartelesPeliculas = array();
-    if ($_SESSION["perfilActivo"] == "TODOS") {
-        foreach($codigosPerfil as $codigo) {
-            $consulta1 -> bind_param("s", $codigo);
-            $consulta1 -> execute();
-            $consulta1 -> bind_result($titulo);
-            $consulta1 -> fetch();
-            $consulta1 -> close();
-            array_push($titulosPeliculas, $titulo);
-            $consulta2 -> bind_param("s", $codigo);
-            $consulta2 -> execute();
-            $consulta2 -> bind_result($cartel);
-            $consulta2 -> fetch();
-            $consulta2 -> close();
-            $cartel = "./img/carteles/".$cartel;
-            array_push($cartelesPeliculas, $cartel);
-        }            
+
+
+    /*
+     *  Obtener los códigos de los vídeos
+     */
+    $dni = $_SESSION["usuario"] -> dni;
+    $consulta = $canal -> prepare("SELECT codigo_video FROM visionado WHERE dni = ?");
+    $consulta -> bind_param("s", $dni);
+    $consulta -> execute();
+    $consulta -> bind_result($codigo_video);
+    $videos_v = array();
+    while ($consulta -> fetch()) {
+        array_push($videos_v, $codigo_video);
     }
-    /*else {
-        $carteles = $funciones -> getCarteles($perfilActual);
-        foreach($carteles as $cartel) {
-            $ruta = "./img/carteles/".$cartel;
-            array_push($rutasCarteles, $ruta);        
-        } 
-    }*/
+    $consulta -> close();
 
 
 
@@ -97,8 +93,8 @@
      */
     $parametros = array("nombreUsuario" => $nombreUsuario,
                         "descripcionesPerfil" => $descripcionesPerfil,
-                        "titulosPeliculas" => $titulosPeliculas,
-                        "cartelesPeliculas" => $cartelesPeliculas);
+                        "videos" => $videos,
+                        "videos_v" => $videos_v);
     $pantalla = new Pantalla("./../../pantallas/videoStreaming");
     $pantalla -> mostrarPantalla("index.tpl", $parametros);
 ?>

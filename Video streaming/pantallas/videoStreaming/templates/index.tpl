@@ -38,22 +38,31 @@
             {/foreach}
         </ul>
         <ul>
-            <form action="#" onclick="proximamente()">
-                <button type="submit"><img src="./img/iconos/ordenar.png" height="18" />Por temática</button>
+            <form method="post" action="./src/cambiarOrden.php">
+                <button type="submit" name="ordenarTematica"><img src="./img/iconos/ordenar.png" height="18" />Por temática</button>
             </form>
-            <form action="#" onclick="proximamente()">
-                <button type="submit"><img src="./img/iconos/ordenar.png" height="18" />Por orden alfabético</button>
+            <form method="post" action="./src/cambiarOrden.php">
+                <button type="submit" name="ordenarAlfabetico"><img src="./img/iconos/ordenar.png" height="18" />Por orden alfabético</button>
             </form>
         </ul>
     </aside>
     <section>
-        {foreach from=$titulosPeliculas item=titulo}
-        {foreach from=$cartelesPeliculas item=cartel}
+        {foreach from=$videos item=video}
+        {$titulo = $video -> titulo}
+        {$ruta = $video -> ruta}
         <a href="#">
-            <img src={$ruta} alt="Cartel" height="300" />
-            <p>{$titulo}</p>
+            <div style="position: relative;">
+                <img src={$ruta} alt="Cartel" height="300" />
+                <p>{$titulo}</p>
+                {foreach from=$videos_v item=codigo}
+                {if $video -> codigo == $codigo}
+                <div class="visto">
+                    <p>✔</p>
+                </div>
+                {/if}
+                {/foreach}
+            </div>
         </a>
-        {/foreach}
         {/foreach}
     </section>
 </body>

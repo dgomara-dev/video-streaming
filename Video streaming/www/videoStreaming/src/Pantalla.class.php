@@ -3,7 +3,7 @@
 
     class Pantalla extends Smarty {
         
-        public function __construct($path) {
+        function __construct($path) {
             date_default_timezone_set("europe/madrid");
             parent::__construct();
             $this -> template_dir = $path."/templates/";
@@ -12,7 +12,7 @@
             $this -> cache_dir = $path."/cache/";
         }
 
-        public function mostrarPantalla($nombrePantalla, $parametros) {
+        function mostrarPantalla($nombrePantalla, $parametros) {
             foreach ($parametros as $variable => $valor) {
                 $this -> assign($variable, $valor);
             }
