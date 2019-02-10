@@ -101,30 +101,37 @@ section {
     margin-bottom: 60px;
 }
 
-section a {
+section form {
     display: inline-block;
     text-align: center;
     text-decoration: none;
     color: white;
-    padding: 5px 20px;
+    padding: 4px 12px;
     margin-right: 15px;
     margin-bottom: 40px;
 }
 
-section a p {
+section form p {
     font-size: 16px;
     font-weight: bold;
     color: lightgray;
 }
 
-section a:hover {
+section form:hover {
     background-color: black;
     opacity: 0.5;
     color: white;
 }
 
-section img {
-    border: 2px solid transparent;
+section button {
+    font-family: "Roboto", sans-serif;
+    background-color: transparent;
+    border: none;
+}
+
+section button:hover {
+    opacity: 1;
+    cursor: pointer;
 }
 
 .visto {
@@ -132,8 +139,8 @@ section img {
     position: absolute;
     top: -5px;
     left: -20px;
-    width: 243px;
-    height: 368px;    
+    width: 240px;
+    height: 365px;
 }
 
 .visto p {

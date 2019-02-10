@@ -82,27 +82,38 @@
     /*
      *  Crear los vídeos
      */
-    $consulta1 = $canal -> prepare("SELECT codigo, titulo, cartel, descargable, sinopsis, video FROM videos WHERE codigo_perfil = ?");
-    $consulta2 = $canal -> prepare("SELECT codigo_tematica FROM asociado WHERE codigo_video = ?");
+    $consulta = $canal -> prepare("SELECT codigo, titulo, cartel, descargable, sinopsis, video FROM videos WHERE codigo_perfil = ?");    
     $videos = array();
     foreach($codigosPerfil as $codigo) {
-        $consulta1 -> bind_param("s", $codigo);
-        $consulta1 -> execute();
-        $consulta1 -> bind_result($codigo, $titulo, $cartel, $descargable, $sinopsis, $video);    
-        while ($consulta1 -> fetch()) {
-            $consulta2 -> bind_param("s", $codigo);
-            $consulta2 -> execute();
-            $consulta2 -> bind_result($codigo_tematica);
-            $tematicas = array();
-            while ($consulta2 -> fetch()) {
-                array_push($tematicas, $codigo_tematica);
-            }
+        $consulta -> bind_param("s", $codigo);
+        $consulta -> execute();
+        $consulta -> bind_result($codigo, $titulo, $cartel, $descargable, $sinopsis, $video);
+        while ($consulta -> fetch()) {
             $ruta = "./img/carteles/".$cartel;
-            array_push($videos, new Video($codigo, $titulo, $cartel, $descargable, $sinopsis, $video, $tematicas, $ruta));
+            array_push($videos, new Video($codigo, $titulo, $cartel, $descargable, $sinopsis, $video, null, $ruta));
         }
     }
+    $consulta -> close();
+
+    $consulta = $canal -> prepare("SELECT codigo_tematica FROM asociado WHERE codigo_video = ?");
+    foreach($videos as $video) {
+        $codigo = $video -> codigo;
+        $consulta -> bind_param("s", $codigo);
+        $consulta -> execute();
+        $consulta -> bind_result($codigo_tematica);
+        $tematicas = array();
+        while ($consulta -> fetch()) {
+            array_push($tematicas, $codigo_tematica);
+        }
+        $video -> tematicas = $tematicas;
+    }
+    $consulta -> close();
+
+
     
-    $consulta1 -> close();  
+    /*
+     *  Cerramos el canal
+     */
     $canal -> close();
 
 
@@ -116,4 +127,5 @@
     $_SESSION["videos"] = $videos;
     $_SESSION["perfilActivo"] = "TODOS";
     $_SESSION["orden"] = "ABC";
+    $_SESSION["ID"] = uniqid();
 ?>

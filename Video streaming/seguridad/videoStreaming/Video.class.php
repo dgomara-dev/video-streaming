@@ -25,6 +25,10 @@
                 return null;    
             }
             return $this -> $atributo;
+        }
+        
+        function __set($atributo, $valor) {
+            $this -> $atributo = $valor;
         } 
     }
 ?>

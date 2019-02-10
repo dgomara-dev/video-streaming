@@ -57,16 +57,13 @@
         });
     }
     else {
-        // TODO -> De momento ordenar según la primera temática, arreglar si da tiempo
-        usort($videos, function($v1, $v2) {
-            return strcmp($v1 -> tematicas[0], $v2 -> tematicas[0]);  
-        }); 
+        // Implementar si da tiempo     
     }
     
 
 
     /*
-     *  Obtener los códigos de los vídeos
+     *  Obtener los códigos de los vídeos vistos
      */
     $dni = $_SESSION["usuario"] -> dni;
     $consulta = $canal -> prepare("SELECT codigo_video FROM visionado WHERE dni = ?");

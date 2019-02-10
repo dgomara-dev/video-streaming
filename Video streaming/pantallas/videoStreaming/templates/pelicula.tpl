@@ -5,7 +5,7 @@
     <title>Ver película - Nitflex</title>
     <meta charset="UTF-8" />
     <link rel="icon" href="./img/iconos/favicon.png" />
-    <link rel="stylesheet" type="text/css" href="./css/index.css" />
+    <link rel="stylesheet" type="text/css" href="./css/pelicula.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="./js/utilidades.js"></script>
@@ -24,16 +24,23 @@
     </header>
     <aside>
         <ul>
-            <form method="post" action="./src/cambiarOrden.php">
-                <button type="submit" name="verPelicula"><img src="./img/iconos/play.png" height="18" />Ver película</button>
+            <form method="post" action="./teatro.php">    
+                <button type="submit" name="verPelicula" value={$nombreCifrado}><img src="./img/iconos/play.png" height="18" />Ver película</button>
             </form>
-            <form method="post" action="./src/cambiarOrden.php">
-                <button type="submit" name="descargar"><img src="./img/iconos/descargar.png" height="18" />Descargar</button>
+            <form method="post" action="./src/descargar.php">
+                <button type="submit" name="descargar" value={$nombreCifrado}><img src="./img/iconos/descargar.png" height="18" />Descargar</button>
             </form>
         </ul>
     </aside>
     <section>
-        jajasi
+        {$ruta = $videoActual -> ruta}
+        {$titulo = $videoActual -> titulo}
+        {$sinopsis = $videoActual -> sinopsis}
+        <img src={$ruta} alt={$titulo} height="300" />
+        <h1>{$titulo}</h1>
+        <h3>{$lineaDescripciones}</h3>
+        <p>{$sinopsis}</p>
+        <a href="./index.php">Volver</a>
     </section>
 </body>
 

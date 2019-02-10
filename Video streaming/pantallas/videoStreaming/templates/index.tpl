@@ -48,21 +48,24 @@
     </aside>
     <section>
         {foreach from=$videos item=video}
+        {$codigo = $video -> codigo}
         {$titulo = $video -> titulo}
         {$ruta = $video -> ruta}
-        <a href="#">
-            <div style="position: relative;">
-                <img src={$ruta} alt="Cartel" height="300" />
-                <p>{$titulo}</p>
-                {foreach from=$videos_v item=codigo}
-                {if $video -> codigo == $codigo}
-                <div class="visto">
-                    <p>✔</p>
+        <form method="post" action="./pelicula.php">
+            <button type="submit" name="codigo" value={$codigo}>
+                <div style="position: relative;">
+                    <img src={$ruta} alt={$titulo} height="300" />
+                    <p>{$titulo}</p>
+                    {foreach from=$videos_v item=codigo}
+                    {if $video -> codigo == $codigo}
+                    <div class="visto">
+                        <p>✔</p>
+                    </div>
+                    {/if}
+                    {/foreach}
                 </div>
-                {/if}
-                {/foreach}
-            </div>
-        </a>
+            </button>
+        </form>
         {/foreach}
     </section>
 </body>
