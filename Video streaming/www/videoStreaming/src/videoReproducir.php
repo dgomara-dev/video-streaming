@@ -1,15 +1,17 @@
 <?php
     require("./../../../seguridad/videoStreaming/Funciones.class.php");
+    require("./../../../seguridad/videoStreaming/VideoStream.class.php");
     require("./../../../seguridad/videoStreaming/Cripto.class.php");
 
 
-
+    
     /*
      *  Comprobar que hay una sesión iniciada
      */
     $funciones = new Funciones();
     $funciones -> iniciarSesion();
-    if (!$funciones -> validarSesion()) {
+    $usuario = "";
+    if (!$funciones -> validarSesion($usuario)) {
         header("Location: ./login.php");
         exit;
     }
@@ -23,7 +25,7 @@
         $nombreCifrado = $_POST["descargar"];
     }
     else {
-        header("Location: ./../pelicula.php");
+        header("Location: ./pelicula.php");
         exit;
     }
 
@@ -33,14 +35,8 @@
 
 
     /*
-     *  Compresión y descarga
+     *  Iniciar el streaming
      */
-    $zip = new ZipArchive();
-    $zip -> open("descarga.zip", ZipArchive::CREATE);
-	$zip -> addFile("./../../../seguridad/videoStreaming/videos".$nombreArchivo);
-    $zip -> close();
-
-    header("Content-disposition: attachment; filename=descarga.zip");
-    header("Content-type: application/zip");
-    readfile($nombreArchivo);
+    $stream = new VideoStream("./../../../seguridad/videoStreaming/videos/".$nombreArchivo);
+    $stream -> start();
 ?>

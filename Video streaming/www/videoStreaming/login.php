@@ -1,7 +1,7 @@
 <?php
-    require("./../../seguridad/videoStreaming/VideosBD.class.php");
-    require("./../../seguridad/videoStreaming/Funciones.class.php");
-    require("./src/Pantalla.class.php");
+    require("./../../seguridad/videoStreaming/src/classes/VideosBD.class.php");
+    require("./../../seguridad/videoStreaming/src/classes/Funciones.class.php");
+    require("./../../seguridad/videoStreaming/src/classes/Pantalla.class.php");
 
 
 

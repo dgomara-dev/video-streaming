@@ -2,8 +2,7 @@
     class Funciones {
         
         function iniciarSesion() {
-            //session_cache_limiter("nocache");
-            session_cache_limiter("public"); //Caché pública, para que no expire la página pelicula.php
+            session_cache_limiter("nocache");
             session_start();
         }
         

@@ -5,8 +5,8 @@
     <title>Iniciar sesión - Nitflex</title>
     <meta charset="UTF-8" />
     <link rel="icon" href="./img/iconos/favicon.png" />
-    <link rel="stylesheet" type="text/css" href="./css/login.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" />
+    <link rel="stylesheet" type="text/css" href="./css/login.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="./js/utilidades.js"></script>
 </head>
@@ -20,8 +20,8 @@
     <section>
         <h3>Iniciar sesión</h3>
         <form method="post" action="./src/sesionValidar.php">
-            <input type="text" placeholder="DNI" name="dni" maxlength="20" size="20" value="11111111A" required="required" />
-            <input type="password" placeholder="Contraseña" name="clave" maxlength="20" size="20" value="1" required="required" />
+            <input type="text" placeholder="DNI" name="dni" maxlength="20" size="20" required="required" />
+            <input type="password" placeholder="Contraseña" name="clave" maxlength="20" size="20" required="required" />
             <button type="submit">Iniciar sesión</button>
         </form>
     </section>

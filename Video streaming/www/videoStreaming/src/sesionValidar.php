@@ -1,4 +1,4 @@
 <?php
-    require("./../../../seguridad/videoStreaming/sesionValidar-s.php");
+    require("./../../../seguridad/videoStreaming/src/sesionValidar-s.php");
     header("Location: ./../index.php");
 ?>

@@ -2,12 +2,12 @@
 <html lang="es">
 
 <head>
-    <title>Ver película - Nitflex</title>
+    <title>Información - Nitflex</title>
     <meta charset="UTF-8" />
     <link rel="icon" href="./img/iconos/favicon.png" />
-    <link rel="stylesheet" type="text/css" href="./css/pelicula.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/info.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="./js/utilidades.js"></script>
 </head>
 
@@ -24,10 +24,11 @@
     </header>
     <aside>
         <ul>
-            <form method="post" action="./teatro.php">    
-                <button type="submit" name="verPelicula" value={$nombreCifrado}><img src="./img/iconos/play.png" height="18" />Ver película</button>
+            {$codigo = $videoActual -> codigo}
+            <form method="post" action="./play.php">    
+                <button type="submit" name="verPelicula" value={$codigo}><img src="./img/iconos/play.png" height="18" />Ver película</button>
             </form>
-            <form method="post" action="./src/descargar.php">
+            <form method="post" action="./src/videoDescargar.php">
                 <button type="submit" name="descargar" value={$nombreCifrado}><img src="./img/iconos/descargar.png" height="18" />Descargar</button>
             </form>
         </ul>

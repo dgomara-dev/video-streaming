@@ -1,5 +1,5 @@
 <?php
-    require("./../../../seguridad/videoStreaming/Funciones.class.php");
+    require("./../../../seguridad/videoStreaming/src/classes/Funciones.class.php");
 
 
     

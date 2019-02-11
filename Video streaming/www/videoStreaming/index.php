@@ -1,14 +1,14 @@
 <?php
-    require("./../../seguridad/videoStreaming/VideosBD.class.php");
-    require("./../../seguridad/videoStreaming/Funciones.class.php");
-    require("./../../seguridad/videoStreaming/Usuario.class.php");
-    require("./../../seguridad/videoStreaming/Video.class.php");
-    require("./src/Pantalla.class.php");
+    require("./../../seguridad/videoStreaming/src/classes/VideosBD.class.php");
+    require("./../../seguridad/videoStreaming/src/classes/Funciones.class.php");
+    require("./../../seguridad/videoStreaming/src/classes/Usuario.class.php");
+    require("./../../seguridad/videoStreaming/src/classes/Video.class.php");
+    require("./../../seguridad/videoStreaming/src/classes/Pantalla.class.php");
     
 
 
     /*
-     *  Comprobar que hay una sesión iniciada
+     *  Comprobar que SI hay una sesión iniciada
      */
     $funciones = new Funciones();
     $funciones -> iniciarSesion();
@@ -57,7 +57,7 @@
         });
     }
     else {
-        // Implementar si da tiempo     
+        // Ordenar por temas   
     }
     
 
